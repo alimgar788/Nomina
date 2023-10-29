@@ -6,17 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@include file="../header/header.jsp" %>
-<div class="buscador">
-    <h2>Consulta el Salario</h2>
+<h2>Consulta el Salario</h2>
+<div class="formulario">
     <form id="formulario-consulta-dni" action="consulta" method="get">
-        <div id="formulario">
-            <div>
-                <label>Introduce el dni que deseas buscar:</label>
-                <input type="text" id="dni" name="dni" placeholder="Ej: 12345678A" required>
-            </div>
-            <div>
-                <input type="submit" value="Buscar">
-            </div>
+        <div class="form_group">
+            <input class="form_field" type="text" id="dni" name="dni" placeholder="Ej: 12345678A" required>
+            <label class="form_label">Introduce el dni que deseas buscar:</label>
+        </div>
+        <div>
+            <input type="submit" value="Buscar">
         </div>
     </form>
 </div>

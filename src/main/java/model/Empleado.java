@@ -70,6 +70,15 @@ public class Empleado extends Persona{
         return categoria;
     }
 
+    public String getSexoFormato() {
+        if (sexo.equals("f".charAt(0))) {
+            return "Femenino";
+        }else if (sexo.equals("m".charAt(0))) {
+            return "Masculino";
+        }else {
+            return "N/C";
+        }
+    }
     /**
      * Método que incrementa en 1 los años de antigüedad del empleado
      */

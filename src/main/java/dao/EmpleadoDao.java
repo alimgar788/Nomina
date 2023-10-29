@@ -21,13 +21,12 @@ public class EmpleadoDao {
     private ResultSet rs;
 
     /**
-     * Obtiene una lista de empleados según un campo y valor especificados.
-     *
-     * @param campo El campo por el cual se va a realizar la consulta. Puede ser null.
-     * @param valor El valor a buscar en el campo especificado.
+     * Obtiene una lista de empleados en función de un campo y un valor dados.
+     * @param campo El campo por el que se realizará la búsqueda.
+     * @param valor El valor que se utilizará en la búsqueda.
      * @return Una lista de objetos Empleado que coinciden con los criterios de búsqueda.
-     * @throws SQLException            Si ocurre un error de SQL.
-     * @throws CierreRecursosException Si ocurre un error al cerrar los recursos.
+     * @throws SQLException si ocurre un error al interactuar con la base de datos.
+     * @throws CierreRecursosException si ocurre un error al cerrar los recursos utilizados en la base de datos.
      */
     public List<Empleado> obtenerListaEmpleados(String campo, Object valor) throws SQLException, CierreRecursosException {
         connection = obtenerConexion();
@@ -38,8 +37,8 @@ public class EmpleadoDao {
         try {
             if (campo != null && campo != "" && valor != null && valor != "") {
                 String columna = getColumn(campo);
-                String operator = getWhereOperator(campo);
-                sql = "SELECT e.*, n.salario FROM empleados e JOIN nominas n ON e.dni = n.dni WHERE " + columna + operator;
+                String operador = getOperador(campo);
+                sql = "SELECT e.*, n.salario FROM empleados e JOIN nominas n ON e.dni = n.dni WHERE " + columna + operador;
                 preparedStatement = connection.prepareStatement(sql);
                 setPreparedStatementValue(preparedStatement, campo, valor);
             }
@@ -60,12 +59,11 @@ public class EmpleadoDao {
     }
 
     /**
-     * Actualiza la información de un empleado en la base de datos.
-     *
-     * @param empl El objeto Empleado con la información actualizada.
-     * @return true si se realiza la actualización correctamente, de lo contrario false.
-     * @throws SQLException            Si ocurre un error de SQL.
-     * @throws CierreRecursosException Si ocurre un error al cerrar los recursos.
+     * Actualiza un objeto Empleado en la base de datos.
+     * @param empl El objeto Empleado que se actualizará.
+     * @return true si la actualización fue exitosa, de lo contrario false.
+     * @throws SQLException si ocurre un error al interactuar con la base de datos.
+     * @throws CierreRecursosException si ocurre un error al cerrar los recursos utilizados en la base de datos.
      */
     public boolean actualizarEmpleado(Empleado empl) throws SQLException, CierreRecursosException {
 
@@ -279,17 +277,26 @@ public class EmpleadoDao {
                 break;
         }
     }
-
-    private String getWhereOperator(String campo) {
-        String operator = " = ?";
+    /**
+     * Obtiene el operador WHERE basado en el campo proporcionado.
+     * @param campo El campo para el que se obtendrá el operador.
+     * @return El operador correspondiente al campo dado.
+     */
+    private String getOperador(String campo) {
+        String operador = " = ?";
         switch (campo) {
             case "nombre":
             case "dni":
-                operator = " like ?";
+                operador = " like ?";
                 break;
       }
-      return operator;
+      return operador;
     }
+    /**
+     * Obtiene la columna basada en el campo proporcionado.
+     * @param campo El campo para el que se obtendrá la columna.
+     * @return La columna correspondiente al campo dado.
+     */
     private String getColumn(String campo) {
         String operator = " = ";
         switch (campo) {

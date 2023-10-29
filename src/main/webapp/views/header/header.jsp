@@ -29,9 +29,7 @@
     </div>
     <div class="content-wrapper">
         <div class="menu">
-            <div id="header-button">
-                <button type="button" id="volver" onclick="volver(event)">Volver</button>
-            </div>
+            <a class="boton-volver" onclick="volver(event)">Volver</a>
             <a href="registro" ${paginaActual == "registro" ? 'class="selected"' : ''}>Registro de empleado</a>
             <a href="listado" ${paginaActual == "listado" ? 'class="selected"' : ''}>Lista de empleados</a>
             <a href="consulta" ${paginaActual == "consulta" ? 'class="selected"' : ''}>Consultar salario</a>

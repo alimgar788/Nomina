@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function validarFormulario(event) {
     const sexoValue = event.target.querySelector('input[name=sexo]').value
-    let dniValue = document.querySelector('#dni').value;
+    let dniValue = document.querySelector('input[name=dni]').value;
     return validarDNI(event, dniValue) || validarSexo(event, sexoValue)
 }
 
@@ -44,7 +44,7 @@ function validarFormularioBusqueda(event) {
     }
 }
 
-function validarDNI(dni) {
+function validarDNI(event, dni) {
     let regex = /^\d{8}[A-Z]$/;
     if (!regex.test(dni)) {
         alert("Por favor, introduce un DNI válido (8 dígitos seguido de una letra).");

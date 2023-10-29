@@ -23,24 +23,6 @@ public class ServletRegistrar extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Crea una nueva instancia de ServletRegistrar.
-     */
-    public ServletRegistrar() {
-        super();
-    }
-
-    /**
-     * Inicializa el servlet, cargando el controlador de la base de datos.
-     */
-    public void init() {
-        try {
-            Class.forName("org.mariadb.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Maneja las solicitudes GET para mostrar la página de registro de empleados.
      *
      * @param request  La solicitud HTTP recibida.

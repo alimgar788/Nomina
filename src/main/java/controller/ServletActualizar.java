@@ -97,17 +97,13 @@ public class ServletActualizar extends HttpServlet {
             }
 
         } catch (SQLException e) {
-            request.setAttribute("mensajeError", "Error SQL al actualizar el empleado en la base de datos");
-            request.getRequestDispatcher("/views/exception/error.jsp").forward(request, response);
+            this.manejaException(e, request, response);
         } catch (CierreRecursosException e) {
-            request.setAttribute("mensajeError", "Error al cerrar los recursos utilizados en la base de datos");
-            request.getRequestDispatcher("/views/exception/error.jsp").forward(request, response);
+            this.manejaException(e, request, response);
         } catch (DatosNoCorrectosException e) {
-            request.setAttribute("mensajeError", "Error en los datos del empleado");
-            request.getRequestDispatcher("/views/exception/error.jsp").forward(request, response);
+            this.manejaException(e, request, response);
         } catch (NumberFormatException e) {
-            request.setAttribute("mensajeError", "Error de formato de número al actualizar el empleado");
-            request.getRequestDispatcher("/views/exception/error.jsp").forward(request, response);
+            this.manejaException(e, request, response);
         } catch (IllegalArgumentException e) {
             this.manejaException(e, request, response);
         }
@@ -202,7 +198,7 @@ public class ServletActualizar extends HttpServlet {
      * @throws IOException      Si ocurre un error de E/S al procesar la solicitud.
      */
     protected void manejaException(SQLException e, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("mensajeError", "Los datos proporcionados no son correctos. " + e.getMessage());
+        request.setAttribute("mensajeError", "Error SQL al actualizar el empleado en la base de datos. " + e.getMessage());
         request.getRequestDispatcher("/views/exception/error.jsp").forward(request, response);
     }
 
@@ -216,7 +212,7 @@ public class ServletActualizar extends HttpServlet {
      * @throws IOException      Si ocurre un error de E/S al procesar la solicitud.
      */
     protected void manejaException(CierreRecursosException e, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("mensajeError", "Los datos proporcionados no son correctos. " + e.getMessage());
+        request.setAttribute("mensajeError", "Error al cerrar los recursos utilizados en la base de datos. " + e.getMessage());
         request.getRequestDispatcher("/views/exception/error.jsp").forward(request, response);
     }
 
@@ -233,4 +229,29 @@ public class ServletActualizar extends HttpServlet {
         request.setAttribute("mensajeError", "Argumento inválido. " + e.getMessage());
         request.getRequestDispatcher("/views/exception/error.jsp").forward(request, response);
     }
+    /**
+     * Maneja la excepción DatosNoCorrectosException.
+     * @param e La excepción DatosNoCorrectosException que se va a manejar.
+     * @param request La solicitud HTTP.
+     * @param response La respuesta HTTP.
+     * @throws ServletException si ocurre un error en el servlet.
+     * @throws IOException si ocurre un error de E/S.
+     */
+    protected void manejaException(DatosNoCorrectosException e, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("mensajeError", "Error en los datos del empleado. " + e.getMessage());
+        request.getRequestDispatcher("/views/exception/error.jsp").forward(request, response);
+    }
+    /**
+     * Maneja la excepción NumberFormatException.
+     * @param e La excepción NumberFormatException que se va a manejar.
+     * @param request La solicitud HTTP.
+     * @param response La respuesta HTTP.
+     * @throws ServletException si ocurre un error en el servlet.
+     * @throws IOException si ocurre un error de E/S.
+     */
+    protected void manejaException(NumberFormatException e, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("mensajeError", "Error de formato de número al actualizar el empleado. " + e.getMessage());
+        request.getRequestDispatcher("/views/exception/error.jsp").forward(request, response);
+    }
+
 }

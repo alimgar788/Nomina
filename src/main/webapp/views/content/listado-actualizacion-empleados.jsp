@@ -6,19 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@include file="../header/header.jsp" %>
+<h2>Actualizaci&oacute;n de empleados</h2>
 <c:if test="${actualizado}">
     <div class="info">El empleado ha sido actualizado correctamente</div>
 </c:if>
 <c:if test="${eliminado}">
     <div class="info">El empleado ha sido eliminado correctamente</div>
 </c:if>
-
-<div class="filtro-busqueda-empleados">
-    <h2>B&uacutesqueda de Empleados</h2>
+<div class="formulario horizontal">
     <form id="formulario-filtro-busqueda-empleado" action="actualiza" method="get">
-        <div>
-            <label>Buscar por:</label>
-            <select name="campo">
+        <div class="form_group">
+            <select class="form_field" name="campo">
                 <option value="nombre" ${campo == "nombre" ? "selected" : ""}>Nombre</option>
                 <option value="dni" ${campo == "dni" ? "selected" : ""}>DNI</option>
                 <option value="sexo" ${campo == "sexo" ? "selected" : ""}>Sexo</option>
@@ -26,41 +24,40 @@
                 <option value="anyos" ${campo == "anyos" ? "selected" : ""}>Antig&uumledad</option>
                 <option value="salario" ${campo == "salario" ? "selected" : ""}>Salario</option>
             </select>
+            <label class="form_label">Buscar por:</label>
         </div>
-        <div>
-            <label>Valor de b&uacutesqueda:</label>
-            <input type="text" name="valor" value="${valor}" placeholder="Filtrar por el dato...">
+        <div class="form_group">
+            <input class="form_field" type="text" name="valor" value="${valor}" placeholder="Filtrar por el dato...">
+            <label class="form_label">Valor de b&uacutesqueda:</label>
         </div>
-        <div>
-            <input type="submit" value="Buscar"/>
+        <div class="button_row">
             <button id="reset" onclick="resetearFormulario(event)">Resetear</button>
+            <input type="submit" value="Buscar"/>
         </div>
     </form>
 </div>
+
 <div class="listado">
     <table class="tabla">
         <tr>
             <th>Nombre</th>
             <th>DNI</th>
-            <th>Sexo</th>
-            <th>Categor&iacutea</th>
-            <th>Antig&uumledad</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
+            <th class="center">Sexo</th>
+            <th class="center">Categor&iacutea</th>
+            <th class="center">Antig&uumledad</th>
+            <th class="actions center">Acciones</th>
         </tr>
         <c:forEach items="${listaEmpleados}" var="empleado">
             <tr>
                 <td>${empleado.nombre}</td>
                 <td>${empleado.dni}</td>
-                <td>${empleado.sexo}</td>
-                <td>${empleado.categoria}</td>
-                <td>${empleado.anyos}</td>
-                <td>
+                <td class="center">${empleado.getSexoFormato()}</td>
+                <td class="center">${empleado.categoria}</td>
+                <td class="center">${empleado.anyos}</td>
+                <td class="actions center">
                     <a href="actualiza?editar=${empleado.dni}">
                         <img src="/Nomina_war_exploded/views/img/editar.png" class="icono-modificar">
                     </a>
-                </td>
-                <td>
                     <a onclick="confirmarEliminacion(event)" href="actualiza?eliminar=${empleado.dni}">
                         <img src="/Nomina_war_exploded/views/img/papelera.png" class="icono-eliminar">
                     </a>

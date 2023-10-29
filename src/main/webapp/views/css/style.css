@@ -77,34 +77,13 @@ body {
     display: flex;
     width: 100%;
     justify-content: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 22px;
 }
 .header h1 {
     font-size: 28px;
 }
-#header-button{
-    margin-bottom: 30px;
-    text-decoration: none;
-    color: #000;
-    margin-bottom: 24px;
-    margin-top:24px;
-    font-weight: 400;
-    transition: all 0.4s;
-}
-#header-button button{
-    width: 100%;
-    height: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-#header-button button:hover{
-    padding-left: 4px;
-    font-weight: bold;
-    transition: all 0.4s;
-}
+
 
 .content-wrapper {
     flex: 1;
@@ -112,38 +91,43 @@ body {
     flex-direction: row;
     width: 100%;
 }
-/*#header-button{*/
-/*    display: flex;*/
-/*    justify-content: flex-end;*/
-/*    width: 30%;*/
-/*}*/
-/*#header-button button{*/
-/*    margin-right: 10%;*/
-/*    font-size: 20px;*/
-/*}*/
+.content h2{
+    margin-bottom: 24px;
+    font-size: 18px;
+}
 
 .menu {
-    flex: 0 0 250px;
+    flex: 0 0 200px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-left: 20px;
+    margin: 0 20px;
     height: 100%;
-    border-right: 1px solid #eee;
+    border-right: 1px solid #ccc;
 }
 .menu a {
     text-decoration: none;
     color: #000;
-    margin-bottom: 10px;
-    margin-top:24px;
+    margin-bottom: 12px;
     font-weight: 400;
     transition: all 0.4s;
+    display: block;
 }
 .menu a.selected,
 .menu a:hover {
     padding-left: 4px;
     font-weight: bold;
     transition: all 0.4s;
+}
+
+.menu a.boton-volver{
+    margin-bottom: 32px;
+    cursor: pointer;
+}
+
+.menu a.boton-volver:hover{
+    margin-left: -10px;
+    font-weight: bold;
 }
 
 .content {
@@ -215,23 +199,34 @@ font-size: 16px;
     display: flex;
     flex-direction: column;
     width: 60%;
-    height: 100%;
     align-items: center;
-    justify-content: center;
-    margin: 75px;
-    border-radius: 30px;
-}
-.formulario h2{
-    margin-bottom: 24px;
-    font-size: 18px;
+    justify-content: flex-start;
 }
 .formulario form {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    height: 90%;
-    justify-content: space-evenly;
-    align-items: stretch;
+    width: 100%;
+}
+.formulario.horizontal {
+    width: 100%;
+    margin-bottom: 48px;
+}
+.formulario.horizontal form {
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.formulario.horizontal form div {
+    width: calc(50% - 12px);
+}
+.formulario.horizontal form div.button_row {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 6px;
+    padding-right: 12px;
+}
+.formulario.horizontal form div.button_row > * {
+    width: auto;
 }
 .formulario form  div{
     display: flex;
@@ -239,26 +234,136 @@ font-size: 16px;
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
+    margin-bottom: 12px;
 }
-.filtro-busqueda-empleados {
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    min-width: 60vw;
-    align-items: center;
-    margin-top: 75px;
+.form_group {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 50%;
+}
+.form_field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #000;
+    outline: 0;
+    font-size: 16px;
+    color: #000;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+.form_field::placeholder {
+    color: transparent;
+}
+.form_field:placeholder-shown ~ .form_label {
+    font-size: 16px;
+    cursor: text;
+    top: 20px;
+}
+.form_label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 14px;
+    color: #000;
+}
+.form_field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #5cb85c, #38ef7d);
+    border-image-slice: 1;
+}
+.form_field:focus ~ .form_label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 14px;
+    color: #000;
+    font-weight: 700;
 }
 
-.listado{
+.radio-button {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 75px;
-    margin-top:40px;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px;
+    position: relative;
+    align-items: center;
+    color: #000;
 }
+
+.radio-button input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.radio {
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    transform: translateZ(-16px);
+    transition: all 0.3s ease-in-out;
+}
+
+.radio::before {
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 10px;
+    top: 5px;
+    left: 5px;
+    border-radius: 50%;
+    background-color: #000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.radio-button input[type="radio"]:checked + .radio {
+    border-color: #5cb85c;
+    transform: translateZ(0px);
+    background-color: #000;
+}
+
+.radio-button input[type="radio"]:checked + .radio::before {
+    opacity: 1;
+}
+
+.select {
+    padding: 0.25em;
+    border: 0;
+    border-bottom: 1px solid #000;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    border-radius: 0;
+}
+.select:focus, select:active {
+    outline: 0;
+    border-bottom-color: #000;
+}
+
+
+/* reset input */
+.form_field:required, .form_field:invalid {
+    box-shadow: none;
+}
+
 .info{
-    margin-left: 26px;
-    margin-bottom: 42px;
+    width: calc(100% - 40px);
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 3px 3px 3px 3px;
+    color: #059;
+    background-color: #BEF;
 }
 .listado div{
     width: 100%;
@@ -274,7 +379,7 @@ font-size: 16px;
 }
 .tabla {
     table-layout: fixed;
-    min-width: 60vw;
+    width: calc(100% - 20px);
     margin: 0 auto;
 }
 .tabla th {
@@ -284,6 +389,13 @@ font-size: 16px;
 }
 .tabla td {
     padding: 4px 0;
+}
+
+.tabla .actions {
+    width: 70px;
+}
+.tabla .center {
+    text-align: center;
 }
 
 td a{
@@ -303,12 +415,6 @@ td a{
     margin-right: 5px;
 }
 
-.buscador{
-    display: flex;
-    flex-direction: column;
-    margin: 75px;
-    align-items: center;
-}
 #formulario-consulta-dni{
     display: flex;
     height: 130px;
@@ -330,20 +436,7 @@ td a{
     flex-direction: column;
     justify-content: space-evenly;
 }
-#formulario-filtro-busqueda-empleado{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-evenly;
-}
-#formulario-filtro-busqueda-empleado div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    width: 200px;
-    flex-wrap: wrap;
-}
+
 input[type="submit"] {
     background-color: #4CAF50;
     border: none;
@@ -356,6 +449,7 @@ input[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100%;
 }
 input[type="submit"]:hover {
     background-color: #45a049;
