@@ -1,13 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>JSP - Hello World</title>
-</head>
-<body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
-</body>
-</html>
+<%@ include file="views/header/header.jsp" %>
+<div class="bienvenida">
+    <div>
+        <h3>Bienvenido a tu herramienta de gesti&oacuten de personal!</h3>
+    </div>
+    <div>
+        <p>Recuerda que puedes realizar cualquier operaci&oacuten,
+            pulsando cualquier opci&oacuten del men&uacute lateral.
+        </p>
+    </div>
+</div>
+<%@ include file="views/footer/footer.jsp" %>
