@@ -13,7 +13,7 @@
                 <h3>El salario correspondiente al empleado:</h3>
             </div>
             <div>
-                <p>Con dni <strong>${dni}</strong> es de: <strong>${salario} &euro;</strong> al mes </p>
+                <p>Con dni <strong>${dni}</strong> es de: <strong>${salario} &euro;</strong> al a&ntilde;o </p>
             </div>
         </c:when>
         <c:when test="${not empty error}">
